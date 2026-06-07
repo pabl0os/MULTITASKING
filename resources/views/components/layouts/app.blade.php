@@ -16,12 +16,19 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased text-slate-800 bg-bg-light">
+        <script>
+            (function () {
+                if (localStorage.getItem('sidebar-collapsed') === 'true') {
+                    document.body.classList.add('sidebar-collapsed');
+                }
+            })();
+        </script>
         <div class="min-h-screen flex w-full">
             <!-- Sidebar Navigation -->
             <x-sidebar />
 
             <!-- Main Content Area -->
-            <main class="flex-1 ml-64 p-8 overflow-y-auto h-screen">
+            <main id="main-content" class="flex-1 ml-64 p-8 overflow-y-auto h-screen">
                 <div class="max-w-6xl mx-auto">
                     <!-- Header/Title section typically injected here if needed, or included in the view -->
                     @if (isset($header))

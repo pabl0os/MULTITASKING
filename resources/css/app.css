@@ -21,3 +21,82 @@
     
     --color-bg-light: #f8fafc;
 }
+
+/* --- Sidebar Collapsible & Premium Transition System --- */
+
+/* Base transition rules */
+#sidebar {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#main-content {
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sidebar label & collapsed class behaviors */
+.sidebar-text-collapse {
+    display: inline-block;
+    opacity: 1;
+    max-width: 200px;
+    transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+body.sidebar-collapsed .sidebar-text-collapse {
+    opacity: 0;
+    max-width: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden;
+    pointer-events: none;
+    display: none; /* completely removes from layout flow when collapsed */
+}
+
+/* Center elements when collapsed */
+body.sidebar-collapsed #sidebar {
+    width: 5rem; /* w-20 */
+}
+
+body.sidebar-collapsed #main-content {
+    margin-left: 5rem; /* ml-20 */
+}
+
+body.sidebar-collapsed #sidebar .logo-container {
+    justify-content: center;
+    width: 100%;
+}
+
+body.sidebar-collapsed #sidebar .logo-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: center;
+}
+
+body.sidebar-collapsed #sidebar a {
+    justify-content: center;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+body.sidebar-collapsed #sidebar .new-task-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+body.sidebar-collapsed #sidebar .new-task-btn {
+    width: 2.75rem; /* h-11 / w-11 equivalent */
+    height: 2.75rem;
+    padding: 0 !important;
+    justify-content: center;
+    border-radius: 9999px; /* circular collapse button */
+}
+
+body.sidebar-collapsed #sidebar .bottom-actions-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+/* Rotate chevron icon when collapsed */
+body.sidebar-collapsed #sidebar #toggle-icon {
+    transform: rotate(180deg);
+}
+
