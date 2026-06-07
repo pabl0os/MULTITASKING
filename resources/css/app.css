@@ -77,18 +77,6 @@ body.sidebar-collapsed #sidebar a {
     padding-right: 0 !important;
 }
 
-body.sidebar-collapsed #sidebar .new-task-container {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-}
-
-body.sidebar-collapsed #sidebar .new-task-btn {
-    width: 2.75rem; /* h-11 / w-11 equivalent */
-    height: 2.75rem;
-    padding: 0 !important;
-    justify-content: center;
-    border-radius: 9999px; /* circular collapse button */
-}
 
 body.sidebar-collapsed #sidebar .bottom-actions-container {
     padding-left: 0.75rem;

@@ -18,16 +18,6 @@
         </div>
     </div>
 
-    <!-- New Task Button -->
-    <div class="px-4 py-2 new-task-container transition-all duration-300">
-        <button class="new-task-btn w-full flex items-center justify-center space-x-2 rounded-xl bg-slate-800/50 border border-slate-700/50 px-4 py-3 text-sm font-medium text-slate-300 transition-all hover:bg-slate-800 hover:text-white group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 group-hover:text-white transition-colors shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
-            <span class="sidebar-text-collapse">Nueva tarea</span>
-        </button>
-    </div>
 
     <!-- Navigation -->
     <nav class="flex-1 px-3 py-4 space-y-1">
