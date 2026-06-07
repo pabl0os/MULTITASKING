@@ -1,6 +1,5 @@
 # Dockerfile
-FROM php:8.2-fpm-alpine
-
+FROM php:8.4-fpm-alpine
 # Instalar dependencias de sistema y extensiones de PHP requeridas por Laravel y PgSQL
 RUN apk add --no-cache \
     nginx \
