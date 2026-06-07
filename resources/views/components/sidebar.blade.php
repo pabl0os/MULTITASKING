@@ -1,0 +1,58 @@
+<aside class="fixed inset-y-0 left-0 w-64 bg-sidebar text-sidebar-text flex flex-col z-20 shadow-2xl">
+    <!-- Logo -->
+    <div class="h-20 flex items-center px-6">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5h3L11 22l2-2.5h-3L13 2z"/></svg>
+            </div>
+            <span class="text-xl font-bold tracking-tight text-white">MultiTasking</span>
+        </div>
+    </div>
+
+    <!-- New Task Button -->
+    <div class="px-4 py-2">
+        <button class="w-full flex items-center justify-center space-x-2 rounded-xl bg-slate-800/50 border border-slate-700/50 px-4 py-3 text-sm font-medium text-slate-300 transition-all hover:bg-slate-800 hover:text-white group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Nueva tarea</span>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 px-3 py-4 space-y-1">
+        @php
+            $navItems = [
+                ['name' => 'Cerebro', 'url' => '/dashboard', 'icon' => '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>'],
+                ['name' => 'Proyectos', 'url' => '/projects', 'icon' => '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>'],
+                ['name' => 'Tareas', 'url' => '/tasks', 'icon' => '<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/>'],
+                ['name' => 'Notificaciones', 'url' => '/notifications', 'icon' => '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>'],
+            ];
+            $currentPath = request()->path();
+        @endphp
+
+        @foreach ($navItems as $item)
+            @php
+                $isActive = str_starts_with($currentPath, ltrim($item['url'], '/')) || ($currentPath == '/' && $item['url'] == '/tasks');
+            @endphp
+            <a href="{{ $item['url'] }}" 
+               class="flex items-center space-x-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all {{ $isActive ? 'bg-sidebar-hover text-sidebar-active shadow-sm shadow-black/10 relative' : 'text-sidebar-text hover:bg-sidebar-hover/50 hover:text-slate-200' }}">
+               
+               @if($isActive)
+               <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full"></div>
+               @endif
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    {!! $item['icon'] !!}
+                </svg>
+                <span>{{ $item['name'] }}</span>
+            </a>
+        @endforeach
+    </nav>
+
+    <!-- Bottom Actions -->
+    <div class="p-4 border-t border-slate-800/50">
+        <a href="/settings" class="flex items-center space-x-3 rounded-xl px-3 py-2.5 text-sm font-medium text-sidebar-text transition-all hover:bg-sidebar-hover/50 hover:text-slate-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Configuración</span>
+        </a>
+    </div>
+</aside>
