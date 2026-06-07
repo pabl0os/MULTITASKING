@@ -198,9 +198,9 @@
                                                 <svg class="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                             </span>
                                         </div>
-                                        <div class="flex-1 min-w-0 pt-1.5 flex justify-between space-x-4">
-                                            <div>
-                                                <p class="text-sm text-slate-600">
+                                        <div class="flex-1 min-w-0 pt-1.5 flex flex-col xl:flex-row xl:justify-between xl:space-x-4">
+                                            <div class="min-w-0 mb-1 xl:mb-0">
+                                                <p class="text-sm text-slate-600 break-words">
                                                     <strong>{{ $history->user->name }}</strong> 
                                                     @if($history->action === 'project_updated')
                                                         actualizó la configuración del proyecto
@@ -244,13 +244,13 @@
 
                 <div class="space-y-4">
                     @foreach ($members as $member)
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600 text-xs border border-slate-200">
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center space-x-3 min-w-0">
+                                <div class="w-8 h-8 rounded-full bg-slate-100 flex-shrink-0 flex items-center justify-center font-bold text-slate-600 text-xs border border-slate-200">
                                     {{ substr($member->name, 0, 2) }}
                                 </div>
-                                <div>
-                                    <h4 class="text-sm font-semibold text-slate-800">{{ $member->name }}</h4>
+                                <div class="min-w-0">
+                                    <h4 class="text-sm font-semibold text-slate-800 truncate" title="{{ $member->name }}">{{ $member->name }}</h4>
                                     <span class="text-[10px] font-bold uppercase tracking-wider
                                         @if($member->pivot->role === 'leader') text-red-500
                                         @elseif($member->pivot->role === 'coleader') text-blue-500
@@ -263,7 +263,7 @@
 
                             @if ($project->status !== 'completed')
                                 <!-- Member Roles Actions -->
-                                <div class="flex items-center space-x-1">
+                                <div class="flex items-center space-x-1 flex-shrink-0">
                                     @if ($userRole === 'leader' && $member->id !== Auth::id())
                                         <!-- Promote/Demote dropdown/action for leader -->
                                         <form action="{{ route('projects.members.role', [$project, $member]) }}" method="POST" class="inline">
