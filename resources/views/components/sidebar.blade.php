@@ -18,6 +18,36 @@
         </div>
     </div>
 
+    <!-- User Profile Section -->
+    @auth
+        <div class="px-5 py-4 border-b border-slate-800/40 user-profile-container transition-all duration-300">
+            <div class="flex items-center space-x-3 user-profile-wrapper">
+                <!-- Avatar Circle -->
+                <div class="w-9 h-9 rounded-xl bg-primary/20 border border-primary/30 flex-shrink-0 flex items-center justify-center font-bold text-primary text-sm shadow-inner shadow-primary/10 select-none">
+                    {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
+                </div>
+                <!-- User Info & Logout -->
+                <div class="flex-1 min-w-0 flex items-center justify-between sidebar-text-collapse">
+                    <div class="min-w-0 pr-2">
+                        <h4 class="text-xs font-semibold text-slate-200 truncate" title="{{ auth()->user()->name }}">
+                            {{ auth()->user()->name }}
+                        </h4>
+                        <span class="block text-[10px] text-slate-500 truncate mt-0.5">{{ auth()->user()->email }}</span>
+                    </div>
+                    <!-- Logout Action -->
+                    <form action="{{ route('logout') }}" method="POST" class="inline flex-shrink-0">
+                        @csrf
+                        <button type="submit" class="text-slate-500 hover:text-red-400 p-1.5 rounded-lg hover:bg-slate-800/50 transition-colors cursor-pointer" title="Cerrar sesión">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endauth
+
 
     <!-- Navigation -->
     <nav class="flex-1 px-3 py-4 space-y-1">

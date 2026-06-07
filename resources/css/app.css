@@ -77,6 +77,14 @@ body.sidebar-collapsed #sidebar a {
     padding-right: 0 !important;
 }
 
+body.sidebar-collapsed #sidebar .user-profile-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+body.sidebar-collapsed #sidebar .user-profile-wrapper {
+    justify-content: center;
+}
 
 body.sidebar-collapsed #sidebar .bottom-actions-container {
     padding-left: 0.75rem;
