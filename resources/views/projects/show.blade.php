@@ -379,13 +379,8 @@
                     @csrf
                     
                     <div>
-                        <label for="invite_user_id" class="block text-sm font-semibold text-slate-700 mb-2">Usuario</label>
-                        <select id="invite_user_id" name="user_id" required class="block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:bg-white">
-                            <option value="">Selecciona un usuario</option>
-                            @foreach ($availableUsers as $avail)
-                                <option value="{{ $avail->id }}">{{ $avail->name }} ({{ $avail->email }})</option>
-                            @endforeach
-                        </select>
+                        <label for="invite_email" class="block text-sm font-semibold text-slate-700 mb-2">Correo Electrónico</label>
+                        <input type="email" id="invite_email" name="email" required class="block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 focus:border-primary focus:bg-white" placeholder="usuario@ejemplo.com" />
                     </div>
 
                     <div>

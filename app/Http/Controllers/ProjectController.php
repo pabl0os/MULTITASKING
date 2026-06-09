@@ -67,9 +67,8 @@ class ProjectController extends Controller
         // We will implement task filtering / sorting in the TaskController, but let's send tasks for now
         $tasks = $project->tasks()->with(['assignee', 'creator'])->get();
 
-        // All users to invite/assign (except current members)
+        // Current members IDs
         $memberIds = $members->pluck('id')->toArray();
-        $availableUsers = User::whereNotIn('id', $memberIds)->get();
 
         // History logs (RF-32)
         $histories = $project->histories()->with('user')->orderBy('created_at', 'desc')->get();
@@ -79,7 +78,7 @@ class ProjectController extends Controller
         $completedTasks = $tasks->where('status', 'completed')->count();
         $progress = $totalTasks > 0 ? round(($completedTasks / $totalTasks) * 100) : 0;
 
-        return view('projects.show', compact('project', 'userRole', 'members', 'tasks', 'availableUsers', 'histories', 'progress'));
+        return view('projects.show', compact('project', 'userRole', 'members', 'tasks', 'histories', 'progress'));
     }
 
     public function update(Request $request, Project $project)
@@ -151,16 +150,25 @@ class ProjectController extends Controller
         }
 
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'email' => 'required|email|exists:users,email',
             'role' => 'required|in:member,coleader',
+        ], [
+            'email.exists' => 'El usuario con este correo electrónico no existe.',
         ]);
+
+        $userToAdd = User::where('email', $request->email)->first();
+
+        // Check if user is already a member
+        if ($project->users()->where('user_id', $userToAdd->id)->exists()) {
+             return back()->withErrors(['email' => 'El usuario ya es miembro de este proyecto.']);
+        }
 
         // RF-14: Colíder no puede asignar a miembros como colíderes
         if ($request->role === 'coleader' && $pivot->role !== 'leader') {
             return back()->withErrors(['role' => 'Solo el líder puede asignar el rol de colíder.']);
         }
 
-        $project->users()->attach($request->user_id, ['role' => $request->role]);
+        $project->users()->attach($userToAdd->id, ['role' => $request->role]);
 
         // Send a notification? Let's implement that when needed.
         
