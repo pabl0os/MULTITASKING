@@ -66,6 +66,10 @@
         @foreach ($navItems as $item)
             @php
                 $isActive = str_starts_with($currentPath, ltrim($item['url'], '/')) || ($currentPath == '/' && $item['url'] == '/tasks');
+                $unreadCount = 0;
+                if ($item['name'] === 'Notificaciones' && auth()->check()) {
+                    $unreadCount = auth()->user()->unreadNotifications->count();
+                }
             @endphp
             <a href="{{ $item['url'] }}" 
                class="flex items-center space-x-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all {{ $isActive ? 'bg-sidebar-hover text-sidebar-active shadow-sm shadow-black/10 relative' : 'text-sidebar-text hover:bg-sidebar-hover/50 hover:text-slate-200' }}">
@@ -77,7 +81,11 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 opacity-80 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     {!! $item['icon'] !!}
                 </svg>
-                <span class="sidebar-text-collapse">{{ $item['name'] }}</span>
+                <span class="sidebar-text-collapse flex-1">{{ $item['name'] }}</span>
+                
+                @if($item['name'] === 'Notificaciones' && $unreadCount > 0)
+                    <span class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full sidebar-text-collapse">{{ $unreadCount }}</span>
+                @endif
             </a>
         @endforeach
     </nav>

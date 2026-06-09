@@ -35,9 +35,9 @@
                 $isRead = !is_null($notification->read_at);
 
                 $iconConfig = match($type) {
-                    'alert' => ['color' => 'text-red-500', 'bg' => 'bg-red-50', 'icon' => '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/>'],
+                    'alert', 'task_overdue' => ['color' => 'text-red-500', 'bg' => 'bg-red-50', 'icon' => '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/>'],
                     'comment' => ['color' => 'text-blue-500', 'bg' => 'bg-blue-50', 'icon' => '<path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/>'],
-                    'assignment', 'task_unlocked' => ['color' => 'text-yellow-500', 'bg' => 'bg-yellow-50', 'icon' => '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>'],
+                    'assignment', 'task_unlocked', 'task_warning' => ['color' => 'text-yellow-500', 'bg' => 'bg-yellow-50', 'icon' => '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>'],
                     default => ['color' => 'text-slate-500', 'bg' => 'bg-slate-50', 'icon' => '<circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/>'],
                 };
             @endphp
