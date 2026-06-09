@@ -48,5 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
     Route::put('/notifications/{notification}/read', [\App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::delete('/notifications/{notification}', [\App\Http\Controllers\NotificationController::class, 'destroy'])->name('notifications.destroy');
+
+    // Translation
+    Route::get('/translation', [\App\Http\Controllers\TranslationController::class, 'index'])->name('translation');
+    Route::post('/translation/translate', [\App\Http\Controllers\TranslationController::class, 'translate'])->name('translation.translate');
 });
 
