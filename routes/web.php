@@ -52,5 +52,8 @@ Route::middleware('auth')->group(function () {
     // Translation
     Route::get('/translation', [\App\Http\Controllers\TranslationController::class, 'index'])->name('translation');
     Route::post('/translation/translate', [\App\Http\Controllers\TranslationController::class, 'translate'])->name('translation.translate');
+
+    // Location
+    Route::get('/location', [\App\Http\Controllers\LocationController::class, 'index'])->name('location');
 });
 
